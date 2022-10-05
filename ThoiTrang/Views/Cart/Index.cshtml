@@ -1,0 +1,136 @@
+﻿@model List<MyClass.Models.CartItem>
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@section footer{
+    <script src="~/Public/Js/Controller/CartControler.js"></script>
+}
+<div class="container mb-5 ">
+    <ul class="breadcrumb">
+        <li><a href="~/trang-chu">Trang chủ</a> <span class="divider">/</span></li>
+        <li class="active"> Giỏ hàng</li>
+    </ul>
+
+    @*<h3>
+            SHOPPING CART [ <small><span id="lbl_number_of_items">0</span> Item(s) </small>]
+            <a href="/" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a>
+        </h3>*@
+
+    <!--hr class="soft" /-->
+    @if (Model.Count() > 0)
+    {
+        int i = 0;
+        //gán số mẫu mẫu tin vào thông báo cart
+        Session["cart"] = Model.Count();
+        <table class="table table-hover" id="tbl_cart">
+            <thead>
+                <tr class="TieuDe text-white">
+                    <th>STT</th>
+                    <th>Ảnh sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="cart_body">
+
+
+
+                @foreach (var item in Model)
+                {
+                    i++;//tăng số thứ tự
+                    <tr>
+                        <td class="pt-5">@i</td>
+                        <td><img width="100" class="hinh" data-slug="@item.Product.Slug" src="~/Public/Images/Product/@item.Product.Image" alt="Sản Phẩm" /></td>
+                        <td class="pt-5">@item.Product.Name</td>
+                        <td class="pt-5"><input type="number" class="txtQuantity h-100" value="@item.Quantity" data-id="@item.Product.Id" name="quantity" min="1" max="5" /></td>
+                        @{if (item.Product.PriceSale != 0)
+                            {
+                                <td class="pt-5"><span class="tienCT">@item.Product.PriceSale</span> <span>VND</span></td>
+                                <td class="pt-5 Thanhtien"><span class="Tien">@(item.Product.PriceSale * item.Quantity)</span> <span>VND</span></td>
+                            }
+                            else
+                            {
+                                <td class="pt-5"><span class="tienCT">@item.Product.Price</span> <span>VND</span></td>
+                                <td class="pt-5 Thanhtien"><span class="Tien">@(item.Product.Price * item.Quantity)</span> <span>VND</span></td>
+                            }}
+
+
+                        <td class="pt-5 fs-4 text-danger"><i data-id="@item.Product.Id" class="btnDelete fa fa-trash text-decoration-none"> <br /><span class="fs-6 ">xóa</span></i></td>
+
+                    </tr>
+                }
+
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align:right"><strong>Tổng tiền = </strong></td>
+                    <td class="label label-important" style="display:block"> <strong> <span id="Tong"></span> <span>VND</span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button id="btnContinue" class="btn btn-success"><i class="fas fa-chevron-left"></i> Tiếp tục mua hàng</button>
+        <button id="btnPayment" class="btn btn-primary float-end">Thanh toán <i class="fas fa-chevron-right"></i></button>
+        <button id="btnDeleteAll" class="btn btn-danger float-end mx-5"><i class="fas fa-trash-alt"></i> Xóa giỏ hàng </button>
+
+    }
+    else
+    {
+        @section Header{
+            <style>
+                .footer {
+                    position: fixed;
+                    bottom: 60px;
+                }
+
+                .copyright {
+                    position: fixed;
+                    bottom: 0;
+                }
+            </style>
+        }
+        <div class='border-0 text-center mt-4'><span class="mx-4 fs-4 text-danger">Không có sản phẩm nào trong giỏ hàng</span><br /> <a href='/' class='btn btn-primary'>tiếp tục mua hàng</a></div>
+        Session["cart"] = 0;
+    }
+    <div>
+        <fb:login-button scope="public_profile,email"
+                         onlogin="checkLoginState();">
+        </fb:login-button>
+        <div id="authstatus"></div>
+    </div>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '568903924865154',
+                cookie: true,
+                xfbml: true,
+                version: 'v5.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                $("#authstatus").html("<code>" + JSON.stringify(response, null, 2) + "</code");
+            });
+        }
+    </script>
+</div>

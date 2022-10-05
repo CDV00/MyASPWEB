@@ -1,0 +1,21 @@
+﻿@model List<MyClass.Models.Post>
+
+@*bai viet*@
+
+@foreach (var item in Model)
+{
+    <div class="forum-item active my-3">
+        <div class="row">
+
+            <div class="col-md-8">
+                <a href="/chi-tiet-bai-viet/@item.Slug" class=".detailPost forum-item-title fs-3 text-decoration-none">
+                    @item.Title
+                </a>
+                <div class="forum-sub-title detailPost">
+                    @item.Detail
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

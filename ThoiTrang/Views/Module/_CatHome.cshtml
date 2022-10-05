@@ -1,0 +1,11 @@
+﻿@model List<MyClass.Models.Category>
+
+@foreach (var item in Model)
+{
+    <a data-id="@item.Id"
+       class="btn btn-secondary mx-md-1 p-1 bd-highlight text-secondary rounded-pill border text-decoration-none bg-white catHome">
+        @item.Name
+    </a>
+}
+
+

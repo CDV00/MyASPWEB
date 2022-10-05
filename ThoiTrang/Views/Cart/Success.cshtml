@@ -1,0 +1,134 @@
+﻿@model List<MyClass.Models.CartItem>
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div class="alert alert-success">
+    Bạn đã đặt hàng thành công.
+</div>
+
+
+@section header{
+    <style>
+        h5 {
+            width: 200px;
+            height: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+            h5:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 45%; /* or 100px */
+                border-bottom: 3px solid #ff6700;
+            }
+    </style>
+
+}
+@section footer{
+    <script src="~/Public/Js/Controller/CartControler.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script>
+        $(document).ready(function () {
+            var items = $('.item').length;
+            if (items === 0) {
+                window.location.href = '/gio-hang';
+            }
+            $.ajax({
+                url: '/Cart/DeleteAll',
+                dataType: 'json',
+                type: 'POST',
+                
+            })
+        });
+        //Xóa tất cả
+        @*$(document).load(function () {
+            $.ajax({
+                url: '/Cart/DeleteAll',
+                dataType: 'json',
+                type: 'POST',
+                success: function (res) {
+                    if (res.status == true) {
+                        alert("a");
+                    }
+                }
+            })
+        });*@
+    </script>
+    
+}
+
+
+@*dường đẫn*@
+<div class="bg-light py-2">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="~/trang-chu">Trang chủ</a> <span class="divider">/</span></li>
+            <li><a href="~/gio-hang">Giỏ hàng</a> <span class="divider">/</span></li>
+            <li class="active"> Thanh toán</li>
+        </ul>
+    </div>
+</div>
+
+@*Title*@
+<div class="container">
+    <h3>Thanh toán Thành công</h3>
+</div>
+
+<div class="container-fluid bg-light mb-5">
+    <div class="container">
+        @*dường line*@
+        <hr class=" bg-info mx-0" style="height: 3px; opacity:0.7;" />
+
+        @Html.Action("_InfoDHTC", "Cart")
+
+        @*Đơn hàng của bạn*@
+        <div class="col-md-12 border">
+            <h5>ĐƠN HÀNG CỦA BẠN</h5>
+            <table class="table table-hover" id="tbl_cart">
+                <thead>
+                    <tr class="TieuDe text-white">
+                        <th>Hình sản phẩm</th>
+                        <th style="border-right: 0.5px solid">Tên sản phẩm</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Tổng</th>
+                    </tr>
+                </thead>
+                <tbody id="cart_body">
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td><img width="100" class="hinh" data-slug="@item.Product.Slug" src="~/Public/Images/Product/@item.Product.Image" alt="Sản Phẩm" /></td>
+                            <td class="pt-5 item" style="border-right:0.5px solid">@item.Product.Name  </td>
+                            <td class="pt-5 item text-center " style="border-right:0.5px solid">@item.Quantity</td>
+                            @{if (item.Product.PriceSale != 0)
+                                {
+                                    <td class="pt-5 Thanhtien text-center"><span class="Tien">@(item.Product.PriceSale * item.Quantity)</span> <span>VND</span></td>
+                                }
+                                else
+                                {
+                                    <td class="pt-5 Thanhtien text-center">@((item.Product.Price * item.Quantity).ToString("#,##0")) Vnđ</td>
+                                }}
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+            <div>Tổng: <b id="Tong" style="margin-left:20px;"></b><b> VND</b></div>
+        </div>
+        <button id="btnDaDatHang" class="btn btn-success my-5"><i class="fas fa-chevron-left"></i> Tiếp tục mua hàng</button>
+    </div>
+    
+</div>
+
+
+
+

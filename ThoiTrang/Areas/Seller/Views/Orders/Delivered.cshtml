@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MyClass.Models.Order>
+@{
+    ViewBag.Title = "Đã giao";
+    Layout = "~/Areas/Seller/Views/Shared/_LayoutSeller.cshtml";
+}
+
+@section header{
+    <link href="~/Public/Template/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/Template/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+@*<div class="row">
+    <div class="col-sm-6">
+        <strong class="text-danger text-uppercase">Tất cả danh mục sản phẩm</strong>
+    </div>*@
+<div class="float-end">
+    <a href="@Url.Action("Delivering","Orders")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Đơn đang giao</a>
+    <a href="@Url.Action("Delivered","Orders")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Đơn đã giao</a>
+    <a href="@Url.Action("Trash","Orders")" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Thùng rác</a>
+</div>
+@*</div>*@
+
+<h2>Đơn hàng Đang giao</h2>
+
+<table id="myTable" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Thông Tin
+            </th>
+            <th>
+                Ngày nhận đơn
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+
+            <th>
+                Xác nhận
+            </th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="margin-left:0">
+                    <ul style="list-style:none; margin-left:0;">
+                        <li>Tên người nhận : @Html.DisplayFor(modelItem => item.DeliveryName)</li>
+                        <li>SDT người nhận : @Html.DisplayFor(modelItem => item.DeliveryPhone)</li>
+                        <li>Email : @Html.DisplayFor(modelItem => item.DeliveryEmail)</li>
+                    </ul>
+                </td>
+                <td>
+
+
+
+                    <input type="datetime" value="@Html.DisplayFor(modelItem => item.CreatedDate)">
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                </td>
+
+                <td class="text-center">
+                    @if (1 == 0)
+                    {
+                        <input type="checkbox" name="checkId" checked value="1" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="checkId" checked value="1" />
+                    }
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Details","Orders", new { id = item.Id })" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> Chi tiết</a>
+                    <a href="@Url.Action("DelTrash","Orders", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>

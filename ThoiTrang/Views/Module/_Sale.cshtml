@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MyClass.Models.Product>
+<div class="latest-product">
+    <div class="product-carousel">
+        @*~/them-gio-hang?productId=@item.Id&quantity=1*@
+        @{ foreach (var item in Model)
+            {
+                <div class="single-product bg-white">
+                    <div class="product-f-image">
+                        <img src="~/Public/Images/Product/@item.Image" alt="@item.Slug">
+                        <div class="product-hover">
+                            <a href="~/them-gio-hang?productId=@item.Id" data-id="@item.Id" class="btn btn-add-cartd add-to-cart-link">
+                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                            </a>
+                            <a href="/chi-tiet-san-pham/@item.Slug" class="view-details-link">
+                                <i class="fa fa-link"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+
+                    <h2>@item.Name</h2>
+
+                    <div class="product-carousel-price ">
+                        <ins>@item.PriceSale.ToString("#,##0")Vnđ</ins> <del>@item.Price.ToString("#,##0")Vnđ</del>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

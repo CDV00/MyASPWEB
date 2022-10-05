@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Chủ đề bài viết";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@section header { 
+    <style>
+        .detailPost {
+            display: -webkit-box;
+            max-height: 3.2rem;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            -webkit-line-clamp: 2;
+            line-height: 1.6rem;
+        }
+    </style>
+}
+
+<div class="container-sm bg-light">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin shop</button>
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Thông tin  công nghệ</button>
+        </div>
+    </nav>
+    <div class="container-md tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active  mx-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+            @Html.Action("_ThongTinShop", "Topic")    
+        
+        </div>
+
+        <div class="tab-pane fade mx-5" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            @Html.Action("_TinCongNghe", "Topic")
+
+        </div>
+
+
+    </div>
+</div>
+

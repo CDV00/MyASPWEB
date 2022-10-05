@@ -1,0 +1,32 @@
+﻿
+
+@model IEnumerable<MyClass.Models.Product>
+@{
+     ViewBag.Title = "layGiaTri";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<div class="container">
+    <div>@ViewBag.so</div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="product col-md-3 bg-light">
+                <a href="~/chi-tiet-san-pham/@item.Slug" class="card border-0 text-decoration-none">
+                    <img src="~/Public/Images/Product/@item.Image" class="card-img-top" alt="hinhsp">
+                    <div class="card-body text-center pt-2">
+                        <h5 class="card-title text-secondary">@item.Name</h5>
+                        <div class="card-text py-0 my-0 ">
+                            <b class="fs-4 text-secondary">@item.PriceSale.ToString("#,##0")  VNĐ</b>
+                        </div>
+                        <div class="Mua pb-2">
+                            <a href="~/them-gio-hang?productId=@item.Id" class="btn btn-primary w-75 px-0">Mua ngay</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+

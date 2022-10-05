@@ -1,0 +1,6 @@
+﻿@model IEnumerable<MyClass.Models.Category>
+@foreach (var item in Model)
+{
+    <li class="dropdown-item"><a href="~/loai-san-pham/@item.Slug" class="text-decoration-none">@item.Name</a></li>
+
+}

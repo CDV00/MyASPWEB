@@ -1,0 +1,48 @@
+﻿
+
+@{
+    ViewBag.Title = "HOME";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<!--Slider-->
+<section class="slider clearfix">
+    @Html.Action("_Slider", "Module")
+</section>
+
+<!-- nội dung-->
+<section class="maincontent bg-light clearfix p-3 pb-5">
+
+    <div class="container ">
+        <div class="row bg-light">
+            <div class="span col-4 py-0">
+                <b class="text-warning h1 " id="Sale">
+                    Sale Hot <img class="h-75 pt-0" src="./assets/img/flash.webp"
+                                  alt="sale">
+                </b>
+            </div>
+            <div class="col-8 text-end my-2">
+                <b class="fs-3">kết thúc sau </b>
+                <span class="border-0 rounded-pill bg-dark text-white p-2 px-3">Ngày : <span id="n">01</span></span>
+                <span class="border-0 rounded-pill bg-dark text-white p-2 px-3">Giờ : <span id="h">01</span></span>
+                <span class="border-0 rounded-pill bg-dark text-white p-2 px-3">Phút : <span id="m">01</span></span>
+                <span class="border-0 rounded-pill bg-dark text-white p-2 px-3">Giây : <span id="s">20</span></span>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-5">
+            <!--San pham-->
+            @Html.Action("_Sale", "Module")
+            <!--sanpham-->
+        </div>
+
+    </div>
+    @ViewBag.f
+    <!--điện thoại-->
+    <div class="container bg-light" id="productHome">
+        @Html.Action("_productHome", "Module")
+    </div>
+
+
+</section>
+
+

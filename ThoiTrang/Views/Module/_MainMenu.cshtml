@@ -1,0 +1,35 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid p-xl-0">
+        <div class="collapse navbar-collapse  " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-6">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="~/trang-chu">Trang chủ</a>
+                </li>
+
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Loại sản phẩm
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @Html.Action("_MenuCat", "Module")
+                    </ul>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Nhà sản xuất
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @Html.Action("_MenuSup", "Module")
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/chu-de-bai-viet">Bài viết</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>

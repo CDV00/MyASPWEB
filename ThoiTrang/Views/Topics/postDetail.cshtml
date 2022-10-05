@@ -1,0 +1,18 @@
+﻿@model List<MyClass.Models.Post>
+@{
+    ViewBag.Title = "postDetail";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <h2>@item.Title</h2>
+        <hr />
+        <div>@item.Detail</div>
+    }
+</div>
+
+
+
+

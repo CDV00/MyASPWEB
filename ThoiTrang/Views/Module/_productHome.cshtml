@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MyClass.Models.Product>
+
+<div class="row bg-light">
+    <div class="span col-3 p-0 ">
+        <h2 class="text-center title ">@ViewBag.CatName</h2>
+    </div>
+    <div class="col-9 d-flex flex-row-reverse bd-highlight py-2 ">
+        <a href="/loai-san-pham/@ViewBag.CatSlug"
+           class="mx-md-1 p-1 bd-highlight text-secondary rounded-pill border text-decoration-none bg-white">
+            Xem tất cả
+        </a>
+        @Html.Action("_CatHome","Module")
+        
+    </div>
+</div>
+<div class="col-md-12 ">
+    <div class="latest-product">
+        <div class="product-carousel">
+            @{ foreach (var item in Model)
+                {
+                    <div class="single-product bg-white">
+                        <div class="product-f-image">
+                            <img src="~/Public/Images/Product/@item.Image" alt="@item.Slug">
+                            <div class="product-hover">
+                                <a href="~/them-gio-hang?productId=@item.Id" class="add-to-cart-link">
+                                    <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                                </a>
+                                <a href="~/chi-tiet-san-pham/@item.Slug" class="view-details-link">
+                                    <i class="fa fa-link"></i> Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+
+                        <h2>@item.Name</h2>
+
+                        <div class="product-carousel-price">
+                            <ins>@item.PriceSale.ToString("#,##0")Vnđ</ins> <del>@item.Price.ToString("#,##0")Vnđ</del>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

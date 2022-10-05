@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link href="~/Public/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/Public/Css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Public/Css/StyleSite.css" rel="stylesheet" />
+    @RenderSection("header", required: false)
+</head>
+
+<body>
+    <!--Topbar-->
+    <section class="Topbar bg-dark bg-opacity-75 py-2">
+        <div class="container">
+            <div class="row ">
+                <div class="leftTopbar col-md-4">
+                    <div class="row">
+                        <div class="col-md-5 p-xl-0"><a class="text-light text-decoration-none" href="/chi-tiet-bai-viet/huong-dan-mua-hang">Hướng dẫn mua hàng</a> </div>
+                        <div class="col-md-1 px-0">|</div>
+
+                        <div class="col-md-6 p-xl-0"><a class="text-light text-decoration-none" href="/chi-tiet-bai-viet/trung-tam-bao-hanh">Trung tâm sửa chữa, bảo hành</a></div>
+                    </div>
+                </div>
+                <div class="rightheader col-md-4">
+                </div>
+                <div class="rightTopbar col-md-4">
+                    <div class="row">
+                        <div class="col-md-5 p-xl-0"><a class="text-light text-decoration-none" href="/chi-tiet-bai-viet/quy-trinh-mua-tra-gop">Quy trình mua trả góp</a></div>
+                        <div class="col-md-1 px-0">|</div>
+                        <div class="col-md-6 p-xl-0"><a class="text-light text-decoration-none" href="/chi-tiet-bai-viet/cac-hinh-thuc-thanh-toan">Các hình thức thanh toán</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Header-->
+    <section class="header clearfix">
+        <div class="container py-2">
+            <div class="row">
+                <!--Logo-->
+                <a href="~/trang-chu" class="col-md-2 logo">
+                    <img src="~/Public/Images/logo.png" alt="Alternate Text" />
+                </a>
+                <!--Menu-->
+                <div class="col-md-4 menu p-xl-0 ">
+                    @Html.Action("_MainMenu", "Module")
+                </div>
+                <!--Thanh tìm kiếm-->
+                <div class="col-md-4 search p-xl-0">
+                    @using (Html.BeginForm("layGiaTri", "Search", FormMethod.Post))
+                    {
+                    <form action="~/tim-kiem" class="search-header" style="width: 90%;">
+                        <div class="input-group w-100">
+                            <input type="text" name="key" class="form-control" placeholder="Tìm kiếm">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                    }
+                        
+
+                </div>
+                <!--Tài khoản-->
+                <div class="col-md-1 Account widget-header">
+                    <a href="~/tai-khoan" class="widget-view ">
+                        <div class="icon-area">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        @{
+                            if (Session["FullName"] == "")
+                            {
+                                <small class="text">Đăng Nhập</small>
+                            }
+                            else
+                            {
+                                <span class="text w-100">@Session["FullName"]</span>
+                            }
+                        }
+                    </a>
+
+                </div>
+                <!--Giỏ hàng-->
+                <div class="col-md-1 widget-header shopingcart">
+                    <div class="widget-header">
+                        <a href="~/gio-hang" class="widget-view">
+                            <div class="icon-area">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="notify rounded-circle fs-6">@Session["cart"]</span>
+                            </div>
+                            <span class="text"> Giỏ hàng </span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="maincontent clearfix">
+        @RenderBody()
+    </section>
+    <!--footer-->
+    <section class="footer clearfix container-fluid bg-black">
+        <div class="container">
+            <div class="row pt-4 py-2">
+                <div class="col-md-4">
+                    <h6 class="title" style="color: #ff6700;">CÔNG TY TNHH MI VIỆT NAM</h6>
+                    <ul class="list-group text-light list-unstyled">
+                        <li>Chi nhánh Hà Nội</li>
+                        <li>Chi nhánh Quận 5</li>
+                        <li>Chi nhánh Quận 10</li>
+                        <li>Hotline: <a href="#" style="color:#ff6700">1900565606</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="title" style="color: #ff6700;">HỔ TRỢ</h6>
+                    <ul class="list-group text-light list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a class="text-light text-decoration-none" href="#"> Các hình thức thanh toán</a></li>
+                        <li><a class="text-light text-decoration-none" href="#">Chính sách bảo hành</a></li>
+                        <li><a class="text-light text-decoration-none" href="#">Hotline sửa chữa (Micare)</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="title" style="color: #ff6700;">GIỚI THIỆU</h6>
+                    <ul class="list-group text-light list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="#">Giới thiệu hệ thống - cửa hàng</a></li>
+                        <li><a class="text-light text-decoration-none" href="#">Chính sách riêng tư</a></li>
+                        <li><a class="text-light text-decoration-none" href="#">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="title" style="color: #ff6700;">LIÊN HỆ</h6>
+                    <ul class="list-group text-light list-unstyled">
+                        <li><a class="text-light text-decoration-none" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a class="text-light text-decoration-none" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a class="text-light text-decoration-none" href="https://web.telegram.org/k/" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--copyright-->
+    <section class="copyright clearfix container-fluid bg-black">
+        <div class="container text-secondary border-top pt-3 py-1">
+            <p class="d">Copyright © 2019 - Bản quyền thuộc về Công ty TNHH Mi Việt Nam. Designed by ZoomWorld</p>
+        </div>
+
+    </section>
+
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Public/Js/jquery-3.6.0.min.js"></script>
+    <!-- Latest jQuery form server -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="~/Public/Js/owl.carousel.min.js"></script>
+    <script src="~/Public/Js/Script.js"></script>
+    @RenderSection("footer", required: false)
+
+</body>
+</html>
